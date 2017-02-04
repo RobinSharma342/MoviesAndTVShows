@@ -15,7 +15,7 @@ public class MovieDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_details);
         TextView tv = (TextView)findViewById(R.id.textView);
-        List<TopRatedMoviesList> moviesLists = (List<TopRatedMoviesList>) getIntent().getSerializableExtra("mylist");
+        List<TopRatedMoviesList> moviesLists = (List<TopRatedMoviesList>) getIntent().getSerializableExtra("mlist");
         tv.setText(moviesLists.get(0).getTitle());
 
     }
