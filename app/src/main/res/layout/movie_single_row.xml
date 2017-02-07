@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:layout_width="80dp"
@@ -28,29 +29,6 @@
         android:id="@+id/movieTitle" />
 
     <TextView
-        android:text="textsno"
-        android:layout_width="25dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginStart="14dp"
-        android:id="@+id/textsno"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="17dp"
-        android:layout_above="@+id/imagestar"
-        android:layout_toRightOf="@+id/imageMovie"
-        android:layout_toEndOf="@+id/imageMovie" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        app:srcCompat="@android:drawable/btn_star_big_on"
-        android:id="@+id/imagestar"
-        android:layout_marginBottom="13dp"
-        android:layout_alignBottom="@+id/imageMovie"
-        android:layout_alignRight="@+id/textsno"
-        android:layout_alignEnd="@+id/textsno" />
-
-    <TextView
         android:text="rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,6 +38,38 @@
         android:layout_alignBottom="@+id/imagestar"
         android:layout_alignLeft="@+id/movieTitle"
         android:layout_alignStart="@+id/movieTitle" />
+
+    <TextView
+        android:text="textsno"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:id="@+id/textsno"
+        android:textColor="#FFFFFF"
+        android:layout_alignTop="@+id/imageMovie"
+        android:layout_toRightOf="@+id/imageMovie"
+        android:layout_toEndOf="@+id/imageMovie" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        android:id="@+id/imagestar"
+        android:layout_below="@+id/textsno"
+        android:layout_alignRight="@+id/textsno"
+        android:layout_alignEnd="@+id/textsno" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/releaseDate"
+        android:textColor="@color/colorText"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/rating"
+        android:layout_alignLeft="@+id/rating"
+        android:layout_alignStart="@+id/rating" />
 
 
 </RelativeLayout>

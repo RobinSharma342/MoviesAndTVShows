@@ -1,4 +1,4 @@
-package com.example.note.pankajpc.latestmoviesandtvshows;
+package com.example.note.pankajpc.latestmoviesandtvshows.navigationdrawer;
 
 /**
  * Created by Pankaj PC on 01-28-2017.

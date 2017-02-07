@@ -4,10 +4,10 @@ package com.example.note.pankajpc.latestmoviesandtvshows.pojo;
  * Created by Pankaj PC on 01-29-2017.
  */
 
-import java.io.Serializable;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class TopRatedMoviesList {
 
