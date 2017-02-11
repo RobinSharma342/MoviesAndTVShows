@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesList;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ import java.util.List;
  */
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
-    static Context context;
+     Context context;
     public View v;
     ViewHolder vh;
     List<TopRatedMoviesList> moviesLists;
@@ -72,7 +74,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mItemClickListenerRecyclerview.onItemClick(view, getAdapterPosition());
+                  EventBus.getDefault().post(moviesLists.get(getAdapterPosition()));
+                    //    mItemClickListenerRecyclerview.onItemClick(view, getAdapterPosition());
                 }
             });
             imageMovie = (ImageView) itemView.findViewById(R.id.imageMovie);

@@ -1,6 +1,7 @@
 package com.example.note.pankajpc.latestmoviesandtvshows;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,8 @@ import com.example.note.pankajpc.latestmoviesandtvshows.network.ApiService;
 import com.example.note.pankajpc.latestmoviesandtvshows.network.RetrofitClient;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesList;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesPojo;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -48,12 +51,14 @@ public class InitialMovieFragement extends Fragment {
     }
 
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         context = getActivity();
         movieTypes = getArguments().getString("Movies Type");
-        Log.i("Movies Type", movieTypes);
         View v = inflater.inflate(R.layout.fragment_movie_layout, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.main_list);
         llm = new LinearLayoutManager(context);
@@ -113,6 +118,8 @@ public class InitialMovieFragement extends Fragment {
         loadJson();
         return v;
     }
+
+
 
     private void loadJson() {
         ApiService api = RetrofitClient.getApiService();

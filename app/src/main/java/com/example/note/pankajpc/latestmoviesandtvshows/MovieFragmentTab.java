@@ -1,6 +1,7 @@
 package com.example.note.pankajpc.latestmoviesandtvshows;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,9 @@ import com.example.note.pankajpc.latestmoviesandtvshows.network.ApiService;
 import com.example.note.pankajpc.latestmoviesandtvshows.network.RetrofitClient;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesList;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesPojo;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -53,6 +57,7 @@ public class MovieFragmentTab extends Fragment {
         context = getActivity();
         Bundle bundle = getArguments();
         movieTypes = bundle.getString("Type");
+
 
         View v = inflater.inflate(R.layout.fragment_movie_layout, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.main_list);
@@ -114,6 +119,8 @@ public class MovieFragmentTab extends Fragment {
         return v;
     }
 
+
+
     private void loadJson() {
         ApiService api = RetrofitClient.getApiService();
         Call<TopRatedMoviesPojo> call = null;
@@ -133,7 +140,6 @@ public class MovieFragmentTab extends Fragment {
                 movieList = response.body().getResults();
                 movieAdapter = new MovieAdapter(context, movieList);
                 recyclerView.setAdapter(movieAdapter);
-                movieAdapter.setOnItemClickListenerRecyclerview(mOnItemClick);
             }
 
             @Override
@@ -146,10 +152,7 @@ public class MovieFragmentTab extends Fragment {
     }
 
 
-    MovieAdapter.OnItemClickListenerRecyclerview mOnItemClick = new MovieAdapter.OnItemClickListenerRecyclerview() {
-        @Override
-        public void onItemClick(View v, int position) {
-            Toast.makeText(context, movieList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
-        }
-    };
+
+
+
 }

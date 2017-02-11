@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainMovie" />
+        <activity android:name=".MovieDetail"></activity>
     </application>
 
 </manifest>

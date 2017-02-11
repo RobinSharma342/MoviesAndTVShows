@@ -1,0 +1,122 @@
+package com.example.note.pankajpc.latestmoviesandtvshows;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesList;
+
+import java.util.List;
+
+public class MovieDetail extends AppCompatActivity {
+    private Context mContext;
+    private ImageView mPoster;
+    private TextView mTitle, mOverview, mMovieGenres, mReleaseDate;
+    private RatingBar mRating;
+    private String mGenres = "";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.movie_detail);
+        mContext = this;
+        TopRatedMoviesList topRatedMoviesList = (TopRatedMoviesList) getIntent().getSerializableExtra("MovieDetailObject");
+
+
+        mPoster = (ImageView) findViewById(R.id.poster);
+        mTitle = (TextView) findViewById(R.id.movieTitle);
+        mOverview = (TextView) findViewById(R.id.movieOverview);
+        mMovieGenres = (TextView) findViewById(R.id.movieGenres);
+        mRating = (RatingBar) findViewById(R.id.rating);
+        mReleaseDate = (TextView) findViewById(R.id.releaseDate);
+
+
+        Glide.with(mContext).load("https://image.tmdb.org/t/p/w500" + topRatedMoviesList.getBackdropPath()).into(mPoster);
+        mTitle.setText(topRatedMoviesList.getTitle());
+        mOverview.setText(topRatedMoviesList.getOverview());
+        mReleaseDate.setText(topRatedMoviesList.getReleaseDate());
+
+        float vote = topRatedMoviesList.getVoteAverage().floatValue();
+        float x = ((vote / 10) * 5);
+        mRating.setRating(x);
+
+
+        List<Integer> genres = topRatedMoviesList.getGenreIds();
+        for (int i = 0; i < genres.size(); i++) {
+            int y = genres.get(i);
+            if((i==0) || (i==genres.size())){
+
+            }
+            else {
+                mGenres = mGenres + "," ;
+            }
+            mGenres = mGenres + getGenres(y);
+
+        }
+        mMovieGenres.setText(mGenres);
+
+    }
+
+    private String getGenres(int y) {
+        if (y == 28) {
+            return "Action";
+
+        } else if (y == 12) {
+            return "Adventure";
+
+        } else if (y == 16) {
+            return "Animation";
+
+        } else if (y == 35) {
+            return "Comedy";
+
+        } else if (y == 80) {
+            return "Crime";
+
+        } else if (y == 99) {
+            return "Documentary";
+
+        } else if (y == 18) {
+            return "Drama";
+
+        } else if (y == 10751) {
+            return "Family";
+
+        } else if (y == 14) {
+            return "Fantasy";
+
+        } else if (y == 36) {
+            return "History";
+
+        } else if (y == 27) {
+            return "Horror";
+
+        } else if (y == 10402) {
+            return "Music";
+
+        } else if (y == 9648) {
+            return "Mystery";
+
+        } else if (y == 10749) {
+            return "Romance";
+        } else if (y == 878) {
+            return "Science Fiction";
+        } else if (y == 10770) {
+            return "TV Movie";
+        } else if (y == 53) {
+            return "Thriller";
+        } else if (y == 10752) {
+            return "War";
+        } else if (y == 37) {
+            return "Western";
+        }
+
+            return "";
+    }
+}

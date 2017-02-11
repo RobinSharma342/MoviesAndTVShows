@@ -13,9 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.note.pankajpc.latestmoviesandtvshows.navigationdrawer.NavigationDrawerAdapter;
 import com.example.note.pankajpc.latestmoviesandtvshows.navigationdrawer.NavigationDrawerModel;
+import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesList;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         navigationLeftDrawer = (ListView) findViewById(R.id.left_drawer);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
 
 
         //setting navigation adapter
@@ -89,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString("Movies Type", "Now Playing Movies");
         fragment = new InitialMovieFragement();
         fragment.setArguments(bundle);
-        setTitle(navigationDrawerModelList.get(0).getNavDescription());
+        setTitle("Now Playing Movies");
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_placeholder, fragment).commit();
     }
@@ -108,4 +114,26 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Subscribe
+    public void onEvent(TopRatedMoviesList topRatedMoviesList){
+        Intent i = new Intent(context, MovieDetail.class);
+        i.putExtra("MovieDetailObject", topRatedMoviesList);
+        startActivity(i);
+    }
+
+
 }
