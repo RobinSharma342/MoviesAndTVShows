@@ -1,22 +1,22 @@
-package com.example.note.pankajpc.latestmoviesandtvshows;
+package com.example.note.pankajpc.latestmoviesandtvshows.moviepackage;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.note.pankajpc.latestmoviesandtvshows.R;
+import com.example.note.pankajpc.latestmoviesandtvshows.moviepackage.MovieAdapter;
 import com.example.note.pankajpc.latestmoviesandtvshows.network.ApiService;
 import com.example.note.pankajpc.latestmoviesandtvshows.network.RetrofitClient;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesList;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesPojo;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -24,14 +24,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
+ * Created by Pankaj PC on 02-05-2017.
  */
-public class InitialMovieFragement extends Fragment {
 
+public class MovieFragmentTab extends Fragment {
     RecyclerView recyclerView;
     Context context;
     MovieAdapter movieAdapter;
@@ -43,26 +40,28 @@ public class InitialMovieFragement extends Fragment {
 
     private int current_page = 1;
     List<TopRatedMoviesList> movieList;
-    String movieTypes;
+    String movieTypes = "Now Playing Movies";
     List<TopRatedMoviesList> tempList;
 
-    public InitialMovieFragement() {
+    public MovieFragmentTab() {
+
 
     }
-
-
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         context = getActivity();
-        movieTypes = getArguments().getString("Movies Type");
+        Bundle bundle = getArguments();
+        movieTypes = bundle.getString("Type");
+
+
         View v = inflater.inflate(R.layout.fragment_movie_layout, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.main_list);
         llm = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(llm);
+
 
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -79,7 +78,7 @@ public class InitialMovieFragement extends Fragment {
                     }
                 }
                 if (!loading
-                        && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold) && current_page < 10) {
+                        && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold) && current_page < 20) {
                     // End has been reached
 
                     // Do something
@@ -150,6 +149,9 @@ public class InitialMovieFragement extends Fragment {
         });
 
     }
+
+
+
 
 
 }

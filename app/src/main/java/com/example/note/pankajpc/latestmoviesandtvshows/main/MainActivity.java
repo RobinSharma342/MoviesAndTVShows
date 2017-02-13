@@ -1,4 +1,4 @@
-package com.example.note.pankajpc.latestmoviesandtvshows;
+package com.example.note.pankajpc.latestmoviesandtvshows.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.example.note.pankajpc.latestmoviesandtvshows.R;
+import com.example.note.pankajpc.latestmoviesandtvshows.moviepackage.MainMovie;
+import com.example.note.pankajpc.latestmoviesandtvshows.moviepackage.MovieDetail;
 import com.example.note.pankajpc.latestmoviesandtvshows.navigationdrawer.NavigationDrawerAdapter;
 import com.example.note.pankajpc.latestmoviesandtvshows.navigationdrawer.NavigationDrawerModel;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesList;
+import com.example.note.pankajpc.latestmoviesandtvshows.tvshows.MainTVShows;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -66,12 +69,15 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             drawerLayout.closeDrawers();
             fragment = null;
+            Intent intent;
             switch (navigationDrawerModelList.get(i).getNavDescription()) {
                 case "Movies":
-                    startActivity(new Intent(context, MainMovie.class));
+                    intent = new Intent(context,MainMovie.class);
+                    startActivity(intent);
                     break;
-                case "Songs":
-                    // startActivity(new Intent(context,MainSongs.class));
+                case "TV Shows":
+                    intent = new Intent(context,MainTVShows.class);
+                    startActivity(intent);
                     break;
                 case "Celebrities":
                     // startActivity(new Intent(context,MainCelebrities.class));
@@ -84,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initDrawerItem() {
         navigationDrawerModelList.add(new NavigationDrawerModel("Movies", R.drawable.ic_movie));
-        navigationDrawerModelList.add(new NavigationDrawerModel("Songs", R.drawable.ic_movie));
+        navigationDrawerModelList.add(new NavigationDrawerModel("TV Shows", R.drawable.ic_movie));
         navigationDrawerModelList.add(new NavigationDrawerModel("Celebrities", R.drawable.ic_movie));
     }
 

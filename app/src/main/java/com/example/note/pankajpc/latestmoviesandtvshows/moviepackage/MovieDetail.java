@@ -1,4 +1,4 @@
-package com.example.note.pankajpc.latestmoviesandtvshows;
+package com.example.note.pankajpc.latestmoviesandtvshows.moviepackage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.note.pankajpc.latestmoviesandtvshows.R;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesList;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class MovieDetail extends AppCompatActivity {
         mReleaseDate = (TextView) findViewById(R.id.releaseDate);
 
 
-        Glide.with(mContext).load("https://image.tmdb.org/t/p/w500" + topRatedMoviesList.getBackdropPath()).into(mPoster);
+        Glide.with(mContext).load("https://image.tmdb.org/t/p/w500" + topRatedMoviesList.getBackdropPath()).fitCenter().into(mPoster);
         mTitle.setText(topRatedMoviesList.getTitle());
         mOverview.setText(topRatedMoviesList.getOverview());
         mReleaseDate.setText(topRatedMoviesList.getReleaseDate());

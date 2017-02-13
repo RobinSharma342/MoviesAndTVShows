@@ -7,7 +7,7 @@
     android:fillViewport="true"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.example.note.pankajpc.latestmoviesandtvshows.MovieDetail">
+    tools:context="com.example.note.pankajpc.latestmoviesandtvshows.moviepackage.MovieDetail">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,7 +19,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@color/colorPrimary"
-        tools:context="com.example.note.pankajpc.latestmoviesandtvshows.MovieDetail">
+        tools:context="com.example.note.pankajpc.latestmoviesandtvshows.moviepackage.MovieDetail">
 
 
         <ImageView

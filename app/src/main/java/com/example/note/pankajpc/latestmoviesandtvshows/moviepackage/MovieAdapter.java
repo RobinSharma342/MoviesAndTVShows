@@ -1,4 +1,4 @@
-package com.example.note.pankajpc.latestmoviesandtvshows;
+package com.example.note.pankajpc.latestmoviesandtvshows.moviepackage;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.note.pankajpc.latestmoviesandtvshows.R;
+import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TVShows;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesList;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,6 +32,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         this.context = context;
         this.moviesLists = moviesLists;
     }
+
 
     public interface OnItemClickListenerRecyclerview {
 
@@ -55,7 +58,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.rating.setText(topRatedMoviesList.getVoteAverage().toString());
         holder.releaseDate.setText(topRatedMoviesList.getReleaseDate());
         holder.textsno.setText("" + (position + 1) + ".");
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500" + topRatedMoviesList.getPosterPath()).into(holder.imageMovie);
+        Glide.with(context).load("https://image.tmdb.org/t/p/w500" + topRatedMoviesList.getPosterPath()).fitCenter().into(holder.imageMovie);
 
     }
 

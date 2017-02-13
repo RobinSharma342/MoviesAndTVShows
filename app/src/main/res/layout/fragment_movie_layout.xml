@@ -1,8 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.note.pankajpc.latestmoviesandtvshows.InitialMovieFragement">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.note.pankajpc.latestmoviesandtvshows.main.InitialMovieFragement"
+    android:orientation="vertical">
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/main_list"
@@ -10,4 +13,4 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
 
-</FrameLayout>
+</LinearLayout>

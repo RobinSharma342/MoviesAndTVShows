@@ -1,5 +1,6 @@
 package com.example.note.pankajpc.latestmoviesandtvshows.network;
 
+import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TVShowsList;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesPojo;
 
 import retrofit2.Call;
@@ -23,4 +24,15 @@ public interface ApiService {
 
     @GET("movie/upcoming")
     Call<TopRatedMoviesPojo> getUpcoming(@Query("api_key") String apikey, @Query("language") String language, @Query("page") int page);
+
+    @GET("tv/on_the_air")
+    Call<TVShowsList> getnowPlayingShows(@Query("api_key") String apikey, @Query("language") String language, @Query("page") int page);
+
+    @GET("tv/popular")
+    Call<TVShowsList> getPopularShows(@Query("api_key") String apikey, @Query("language") String language, @Query("page") int page);
+
+    @GET("tv/top_rated")
+    Call<TVShowsList> getTopRatedShows(@Query("api_key") String apikey, @Query("language") String language, @Query("page") int page);
+
+
 }

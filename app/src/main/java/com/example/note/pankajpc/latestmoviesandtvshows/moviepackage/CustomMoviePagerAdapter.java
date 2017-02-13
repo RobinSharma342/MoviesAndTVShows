@@ -1,18 +1,20 @@
-package com.example.note.pankajpc.latestmoviesandtvshows;
+package com.example.note.pankajpc.latestmoviesandtvshows.moviepackage;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.note.pankajpc.latestmoviesandtvshows.moviepackage.MovieFragmentTab;
+
 /**
  * Created by Pankaj PC on 02-05-2017.
  */
-public class CustomPagerAdapter extends FragmentStatePagerAdapter {
+public class CustomMoviePagerAdapter extends FragmentStatePagerAdapter {
 
     private String[] mPageTitle;
 
-    public CustomPagerAdapter(FragmentManager fm, String[] mPageTitle) {
+    public CustomMoviePagerAdapter(FragmentManager fm, String[] mPageTitle) {
         super(fm);
         this.mPageTitle = mPageTitle;
     }
@@ -39,6 +41,7 @@ public class CustomPagerAdapter extends FragmentStatePagerAdapter {
                 bundle.putString("Type", "Upcoming Movies");
                 ff.setArguments(bundle);
                 return ff;
+
             default:
                 return null;
         }
