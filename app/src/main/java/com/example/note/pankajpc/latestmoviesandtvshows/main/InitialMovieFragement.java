@@ -3,6 +3,7 @@ package com.example.note.pankajpc.latestmoviesandtvshows.main;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,7 +38,7 @@ public class InitialMovieFragement extends Fragment {
     LinearLayoutManager llm;
     private int previousTotal = 0;
     private boolean loading = true;
-    private int visibleThreshold = 7;
+    private int visibleThreshold = 8;
     int firstVisibleItem, visibleItemCount, totalItemCount;
 
     private int current_page = 1;
@@ -50,18 +51,15 @@ public class InitialMovieFragement extends Fragment {
     }
 
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         context = getActivity();
-        movieTypes = getArguments().getString("Movies Type");
         View v = inflater.inflate(R.layout.fragment_movie_layout, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.main_list);
         llm = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(llm);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -78,22 +76,14 @@ public class InitialMovieFragement extends Fragment {
                     }
                 }
                 if (!loading
-                        && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold) && current_page < 10) {
+                        && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold) && current_page < 20) {
                     // End has been reached
 
                     // Do something
                     current_page++;
                     ApiService api = RetrofitClient.getApiService();
                     Call<TopRatedMoviesPojo> call = null;
-                    if (movieTypes.equalsIgnoreCase("Now Playing Movies")) {
-                        call = api.getnowPlaying("55678da3e71af39e568440d6c13a4d3b", "en-US", current_page);
-                    } else if (movieTypes.equalsIgnoreCase("Popular Movies")) {
-                        call = api.getPopular("55678da3e71af39e568440d6c13a4d3b", "en-US", current_page);
-                    } else if (movieTypes.equalsIgnoreCase("Top Rated Movies")) {
-                        call = api.getTopRated("55678da3e71af39e568440d6c13a4d3b", "en-US", current_page);
-                    } else if (movieTypes.equalsIgnoreCase("Upcoming Movies")) {
-                        call = api.getUpcoming("55678da3e71af39e568440d6c13a4d3b", "en-US", current_page);
-                    }
+                    call = api.getnowPlaying("55678da3e71af39e568440d6c13a4d3b", "en-US", current_page);
                     call.enqueue(new Callback<TopRatedMoviesPojo>() {
                         @Override
                         public void onResponse(Call<TopRatedMoviesPojo> call, Response<TopRatedMoviesPojo> response) {
@@ -119,34 +109,24 @@ public class InitialMovieFragement extends Fragment {
     }
 
 
-
     private void loadJson() {
         ApiService api = RetrofitClient.getApiService();
         Call<TopRatedMoviesPojo> call = null;
-        if (movieTypes.equalsIgnoreCase("Now Playing Movies")) {
-            call = api.getnowPlaying("55678da3e71af39e568440d6c13a4d3b", "en-US", current_page);
-        } else if (movieTypes.equalsIgnoreCase("Popular Movies")) {
-            call = api.getPopular("55678da3e71af39e568440d6c13a4d3b", "en-US", current_page);
-        } else if (movieTypes.equalsIgnoreCase("Top Rated Movies")) {
-            call = api.getTopRated("55678da3e71af39e568440d6c13a4d3b", "en-US", current_page);
-        } else if (movieTypes.equalsIgnoreCase("Upcoming Movies")) {
-            call = api.getUpcoming("55678da3e71af39e568440d6c13a4d3b", "en-US", current_page);
-        }
+        call = api.getnowPlaying("55678da3e71af39e568440d6c13a4d3b", "en-US", current_page);
         call.enqueue(new Callback<TopRatedMoviesPojo>() {
-            @Override
-            public void onResponse(Call<TopRatedMoviesPojo> call, Response<TopRatedMoviesPojo> response) {
-                Log.i("response", "responsecode" + response);
-                movieList = response.body().getResults();
-                movieAdapter = new MovieAdapter(context, movieList);
-                recyclerView.setAdapter(movieAdapter);
-            }
+                @Override
+                public void onResponse(Call<TopRatedMoviesPojo> call, Response<TopRatedMoviesPojo> response) {
+                    movieList = response.body().getResults();
+                    movieAdapter = new MovieAdapter(context, movieList);
+                    recyclerView.setAdapter(movieAdapter);
+                }
 
-            @Override
-            public void onFailure(Call<TopRatedMoviesPojo> call, Throwable t) {
-                Log.i("failure", "failure" + t.getLocalizedMessage());
+                @Override
+                public void onFailure(Call<TopRatedMoviesPojo> call, Throwable t) {
+                    Log.i("failure", "failure" + t.getLocalizedMessage());
 
-            }
-        });
+                }
+            });
 
     }
 

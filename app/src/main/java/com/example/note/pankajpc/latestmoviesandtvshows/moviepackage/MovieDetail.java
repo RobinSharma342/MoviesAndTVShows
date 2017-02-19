@@ -1,13 +1,11 @@
 package com.example.note.pankajpc.latestmoviesandtvshows.moviepackage;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.note.pankajpc.latestmoviesandtvshows.R;

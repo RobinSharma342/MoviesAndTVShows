@@ -3,6 +3,7 @@
     package="com.example.note.pankajpc.latestmoviesandtvshows">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -10,20 +11,45 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.MainActivity">
+        <activity
+            android:name=".main.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".moviepackage.MainMovie">
-
-
+        <activity
+            android:name=".moviepackage.MainMovie"
+            android:parentActivityName=".main.MainActivity">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchActivity" />
         </activity>
-        <activity android:name=".moviepackage.MovieDetail"></activity>
-        <activity android:name=".tvshows.MainTVShows"></activity>
-        <activity android:name=".tvshows.TVShowsDetail"></activity>
+        <activity android:name=".moviepackage.MovieDetail" />
+        <activity android:name=".celebrity.CelebDetail" />
+        <activity
+            android:name=".tvshows.MainTVShows"
+            android:parentActivityName=".main.MainActivity" />
+        <activity android:name=".tvshows.TVShowsDetail" />
+        <activity android:name=".SearchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".SearchActivity" />
+
+        <activity android:name=".celebrity.MainCelebrity"
+            android:parentActivityName=".main.MainActivity"
+            ></activity>
     </application>
 
 </manifest>

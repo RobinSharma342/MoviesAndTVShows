@@ -3,6 +3,7 @@ package com.example.note.pankajpc.latestmoviesandtvshows.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,7 +15,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.note.pankajpc.latestmoviesandtvshows.CheckInternetConnection;
+import com.example.note.pankajpc.latestmoviesandtvshows.NoInternetDialog;
 import com.example.note.pankajpc.latestmoviesandtvshows.R;
+import com.example.note.pankajpc.latestmoviesandtvshows.celebrity.MainCelebrity;
 import com.example.note.pankajpc.latestmoviesandtvshows.moviepackage.MainMovie;
 import com.example.note.pankajpc.latestmoviesandtvshows.moviepackage.MovieDetail;
 import com.example.note.pankajpc.latestmoviesandtvshows.navigationdrawer.NavigationDrawerAdapter;
@@ -28,7 +32,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NoInternetDialog.DialogClickEvent {
 
     List<NavigationDrawerModel> navigationDrawerModelList = new ArrayList<>();
     ListView navigationLeftDrawer;
@@ -43,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.navigation_drawer);
         context = this;
         initDrawerItem();
+        if(!CheckInternetConnection.checkInternet())
+        {
+            DialogFragment dialogFragment = new NoInternetDialog();
+            dialogFragment.setCancelable(false);
+            dialogFragment.show(getSupportFragmentManager(),"test");
+        }
         initMovieFragmentData();
 
 
@@ -80,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case "Celebrities":
-                    // startActivity(new Intent(context,MainCelebrities.class));
+                    intent = new Intent(context, MainCelebrity.class);
+                    startActivity(intent);
+
                     break;
             }
 
@@ -142,4 +154,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPositiveButtonClick() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onNegativeButtonClick() {
+
+    }
 }

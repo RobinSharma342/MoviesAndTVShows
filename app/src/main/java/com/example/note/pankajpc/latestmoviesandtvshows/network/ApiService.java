@@ -1,10 +1,13 @@
 package com.example.note.pankajpc.latestmoviesandtvshows.network;
 
+import com.example.note.pankajpc.latestmoviesandtvshows.pojo.CelebrityList;
+import com.example.note.pankajpc.latestmoviesandtvshows.pojo.PersonData;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TVShowsList;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesPojo;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -34,5 +37,19 @@ public interface ApiService {
     @GET("tv/top_rated")
     Call<TVShowsList> getTopRatedShows(@Query("api_key") String apikey, @Query("language") String language, @Query("page") int page);
 
+    @GET("search/movie")
+    Call<TopRatedMoviesPojo> searchMovies(@Query("api_key") String apikey, @Query("language") String language, @Query("query") String query,@Query("page") int page);
+
+    @GET("search/tv")
+    Call<TVShowsList> searchTVShows(@Query("api_key") String apikey, @Query("language") String language, @Query("query") String query,@Query("page") int page);
+
+    @GET("search/person")
+    Call<CelebrityList> searchPerson(@Query("api_key") String apikey, @Query("language") String language, @Query("query") String query,@Query("page") int page);
+
+    @GET("person/popular")
+    Call<CelebrityList> getPopularPerson(@Query("api_key") String apikey, @Query("language") String language, @Query("page") int page);
+
+    @GET("person/{person_id}")
+    Call<PersonData> getPersonData(@Path("person_id") int personid, @Query("api_key") String apikey, @Query("language") String language);
 
 }

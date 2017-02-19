@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.note.pankajpc.latestmoviesandtvshows.R;
-import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TVShows;
 import com.example.note.pankajpc.latestmoviesandtvshows.pojo.TopRatedMoviesList;
 
 import org.greenrobot.eventbus.EventBus;
